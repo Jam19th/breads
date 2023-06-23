@@ -4,7 +4,12 @@ const Bread = require('../models/bread.js');
 
 //index route
 breads.get('/', (req, res) => {
-    res.send('Bread') 
+    // res.send(Bread) 
+    res.render('Index', {
+        breads: Bread,
+        username: 'John Doe',
+        asdf: 'jkl',
+    })
 })
 
 //show route
