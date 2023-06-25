@@ -5,9 +5,17 @@ function Default(html) {
         <html>
             <head>
                 <title>{html.title || 'Default'}</title>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossOrigin="anonymous" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossOrigin="anonymous" />
+                <link rel="stylesheet" href="/main.css" />
             </head>
             <body>
-                <h1>HTML Rendered!</h1>
+                {/* <h1>HTML Rendered!</h1> */}
+                <div className="wrapper">
+                    <header>
+                        <h2><a href="/breads">BreadCRUD</a></h2>
+                    </header>
+                </div>
                 <div className="container">
                     {html.children}
                 </div>
@@ -16,4 +24,4 @@ function Default(html) {
     )
 }
 
-module.exports = Default; 
+module.exports = Default;

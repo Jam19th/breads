@@ -3,18 +3,18 @@ const breads = express.Router();
 const Bread = require('../models/bread.js');
 
 //index route
-breads.get('/', (req, res) => {
+breads.get('/:arrayIndex', (req, res) => {
     // res.send(Bread) 
-    res.render('Index', {
-        breads: Bread,
-        title: 'Index Page',
-        username: 'John Doe',
-        asdf: 'jkl',
-    })
+    if (Bread[req.params.arrayIndex]) {
+        res.render('Show', {
+            bread: Bread[req.params.arrayIndex]
+        })
+    } else {
+        res.send('404')
+    }
 })
 
 //show route
-
 breads.get('/:arrayIndex', (req, res) => {
     const index = req.params.arrayIndex
     res.send(Bread[index])
