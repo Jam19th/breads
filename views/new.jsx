@@ -5,7 +5,7 @@ function New() {
     return (
         <Default>
             <h2>Add a new bread</h2>
-            <div className="newButton" >
+            <div className="backButton" >
                 <a href="/breads"><button>Go back to the index</button></a>
             </div>
             <form action="/breads" method="POST">
@@ -14,14 +14,16 @@ function New() {
                     type="text"
                     name="name"
                     id="name"
+                    placeholder="Name"
                     required
                 />
                 <label htmlFor="image">Image</label>
-                <label htmlFor="name">Name</label>
                 <input
                     type="text"
                     name="image"
                     id="image"
+                    pattern="^(https?:\/\/)?[^\s/$.?#].[^\s]*\.(jpg|jpeg|gif|png|bmp)$"
+                    placeholder="Valid image link"
                 />
                 <label htmlFor="hasGluten">Has Gluten?</label>
                 <input

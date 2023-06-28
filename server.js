@@ -1,6 +1,7 @@
 //Dependencies
 const express = require ('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 //configure express
 require('dotenv').config();
@@ -15,6 +16,7 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 //routes
 app.get('/', (req, res) => {
@@ -27,7 +29,7 @@ app.use('/breads', breadsController);
 
 // 404 route
 app.get('*', (req, res) => {
-    res.status(404).send('404 Page not found')
+    res.render('404error')
 })
 
 //listen
@@ -35,4 +37,5 @@ app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
     console.log(`http://localhost:${PORT}/breads`)
     console.log(`http://localhost:${PORT}/breads/new`)
+    console.log(`http://localhost:${PORT}/404test`)
 })

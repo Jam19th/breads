@@ -1,11 +1,16 @@
 const React = require('react');
-const Default = require('./layout/default');
+const Default = require('./layout/default.jsx');
 
-function Show({ bread }) {
+function Show({ bread, index }) {
     // console.log(bread.name);
     //confirm we are getting our bread data in the terminal
     return (
         <Default>
+            {/* add a delete button */}
+            <form action={`/breads/${index}?_method=DELETE`} method="POST">
+                <input type='submit' value="DELETE" />
+            </form>
+
             {/* <h2>Show page</h2> */}
             <h3>{bread.name}</h3>
             <p>
