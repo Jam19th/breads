@@ -32,6 +32,14 @@ function New() {
                     id="hasGluten"
                     defaultChecked
                 />
+                <label htmlFor="ingredients">Ingredients</label>
+                <input
+                    type="text"
+                    name="ingredients"
+                    id="ingredients"
+                    placeholder="Ingredients"
+                    required
+                />
                 <br />
                 <input type="submit" />
             </form>

@@ -37,5 +37,6 @@ app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
     console.log(`http://localhost:${PORT}/breads`)
     console.log(`http://localhost:${PORT}/breads/new`)
+    console.log(`http://localhost:${PORT}/breads/0/edit`)
     console.log(`http://localhost:${PORT}/404test`)
 })
