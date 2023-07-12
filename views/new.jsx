@@ -3,7 +3,7 @@ const Default = require('./layout/default.jsx');
 
 function New() {
     return (
-        <Default>
+        <Default title='Add a new bread'>
             <h2>Add a new bread</h2>
             <div className="backButton" >
                 <a href="/breads"><button>Go back to the index</button></a>
@@ -32,14 +32,23 @@ function New() {
                     id="hasGluten"
                     defaultChecked
                 />
-                <label htmlFor="ingredients">Ingredients</label>
+                {/* <label htmlFor="ingredients">Ingredients</label>
                 <input
                     type="text"
                     name="ingredients"
                     id="ingredients"
                     placeholder="Ingredients"
                     required
-                />
+                /> */}
+                <label htmlFor="baker">Baker</label>
+                <select name="baker" id="baker">
+                    <option value="Rachel">Rachel</option>
+                    <option value="Monica">Monica</option>
+                    <option value="Joey">Joey</option>
+                    <option value="Chandler">Chandler</option>
+                    <option value="Ross">Ross</option>
+                    <option value="Phoebe">Phoebe</option>
+                </select>
                 <br />
                 <input type="submit" />
             </form>

@@ -1,7 +1,8 @@
 //Dependencies
-const express = require ('express');
+const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 
 //configure express
 require('dotenv').config();
@@ -40,3 +41,11 @@ app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}/breads/0/edit`)
     console.log(`http://localhost:${PORT}/404test`)
 })
+
+//connect to mongoose
+// mongoose.connect('mongodb://localhost:27017/breads', { useNewUrlParser: true, useUnifiedTopology: true },
+// () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+// );
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true },
+    // () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+);
