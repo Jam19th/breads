@@ -10,12 +10,11 @@ const breadSchema = new Schema({
     // ingredients: { type: String },
     hasGluten: Boolean,
     image: { type: String, default: 'http://placekitten.com/g/200/300' },
+    //this id is a reference to the baker collection
     baker: {
-        type: String,
-        enum: {
-            values: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe'],
-            message: "{VALUE} is not a valid baker"
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Baker',
+        // message: "{VALUE} is not a valid baker",
     }
 })
 
@@ -23,7 +22,8 @@ const breadSchema = new Schema({
 
 //instance method
 breadSchema.methods.getBakedBy = function () {
-    return `${this.name} was baked with love by ${this.baker}`
+    // console.log(this);
+    return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
 }
 
 //static method

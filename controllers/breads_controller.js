@@ -1,43 +1,46 @@
 const express = require('express');
 const breads = express.Router();
 const Bread = require('../models/bread.js');
-const seedData = require('../models/seed.js')
+const Baker = require('../models/baker.js')
+const seedData = require('../models/bread_seed.js')
 
 //Index /breads Route
 breads.get('/', (req, res) => {
-    Bread.find()
-        .then(foundBreads => {
-            // console.log(foundBreads);
-            res.render('index', {
-                breads: foundBreads,
-                title: 'Index Page',
-            })
+    Baker.find()
+        .then(foundBakers => {
+            Bread.find()
+                .populate('baker')
+                .then(foundBreads => {
+                    res.render('index', {
+                        breads: foundBreads,
+                        bakers: foundBakers,
+                        title: 'Index Page',
+                    })
+                })
         })
 })
 
-//New Route
 breads.get('/new', (req, res) => {
-    console.log('new route');
-    res.render('New')
+    Baker.find()
+        .then(foundBakers => {
+            res.render('New', {
+                bakers: foundBakers,
+            })
+        })
 })
 
 //Show Route
 breads.get('/:id', (req, res) => {
     const id = req.params.id;
     Bread.findById(id)
+        .populate('baker')
         .then(foundBread => {
-            const bakersName = foundBread.baker;
-            Bread.findBakersOtherBreads(bakersName)
-                .then((bakersOtherBreads) => {
-                    console.log(bakersOtherBreads);
-                    res.render('Show', {
-                        bread: foundBread,
-                        bakersOtherBreads
-                    })
-                })
+            res.render('Show', {
+                bread: foundBread,
+            })
         })
         .catch((error) => {
-            console.log('Whoops error', error);
+            // console.log('Whoops error', error);
             res.render('404')
         })
 })
@@ -93,13 +96,15 @@ breads.put('/:id', (req, res) => {
 
 // EDIT Route
 breads.get('/:id/edit', (req, res) => {
-    Bread.findById(req.params.id)
-        .then(foundBread => {
-            res.render('edit', {
-                // bread: Bread[req.params.indexArray],
-                // index: req.params.indexArray
-                bread: foundBread,
-            })
+    Baker.find()
+        .then(foundBakers => {
+            Bread.findById(req.params.id)
+                .then(foundBread => {
+                    res.render('edit', {
+                        bread: foundBread,
+                        bakers: foundBakers
+                    })
+                })
         })
 })
 

@@ -1,7 +1,8 @@
 const React = require('react');
 const Default = require('./layout/default.jsx');
 
-function New({ error }) {
+function New({ bakers }) {
+    console.log({ bakers });
     return (
         <Default title='Add a new bread'>
             <h2>Add a new bread</h2>
@@ -41,16 +42,26 @@ function New({ error }) {
                     required
                 /> */}
                 <label htmlFor="baker">Baker</label>
-                <select name="baker" id="baker">/8
+                <select name="baker" id="baker">
+                    {bakers.map((baker) => {
+                        return (
+                            <option value={baker._id} key={baker._id}>
+                                {baker.name}
+                            </option>
+                        )
+                    })}
+                </select>
+
+                {/* <select name="baker" id="baker">
                     <option value="Rachel">Rachel</option>
                     <option value="Monica">Monica</option>
                     <option value="Joey">Joey</option>
                     <option value="Chandler">Chandler</option>
                     <option value="Ross">Ross</option>
                     <option value="Phoebe">Phoebe</option>
-                </select>
+                </select> */}
                 <br />
-                <div style={{ color: 'red' }}>{error ? (<div>{error.errors.baker.message}</div>) : null}</div>
+                {/* <div style={{ color: 'red' }}>{error ? (<div>{error.errors.baker.message}</div>) : null}</div> */}
                 <input type="submit" />
             </form>
         </Default>

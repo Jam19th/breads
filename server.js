@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
 const breadsController = require('./controllers/breads_controller.js');
 app.use('/breads', breadsController);
 
+//baker routes
+const bakersController = require('./controllers/bakers_controller.js');
+app.use('/bakers', bakersController);
+
 // 404 route
 app.get('*', (req, res) => {
     res.render('404error')
@@ -37,6 +41,7 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
     console.log(`http://localhost:${PORT}/breads`)
+    console.log(`http://localhost:${PORT}/bakers`)
     console.log(`http://localhost:${PORT}/breads/new`)
     console.log(`http://localhost:${PORT}/breads/0/edit`)
     console.log(`http://localhost:${PORT}/404test`)
