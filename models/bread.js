@@ -12,9 +12,24 @@ const breadSchema = new Schema({
     image: { type: String, default: 'http://placekitten.com/g/200/300' },
     baker: {
         type: String,
-        enum: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe']
+        enum: {
+            values: ['Rachel', 'Monica', 'Joey', 'Chandler', 'Ross', 'Phoebe'],
+            message: "{VALUE} is not a valid baker"
+        }
     }
 })
+
+//helper methods
+
+//instance method
+breadSchema.methods.getBakedBy = function () {
+    return `${this.name} was baked with love by ${this.baker}`
+}
+
+//static method
+breadSchema.statics.findBakersOtherBreads = function (bakersName) {
+    return this.find({ baker: bakersName })
+}
 
 //bread model
 const Bread = mongoose.model('Bread', breadSchema)

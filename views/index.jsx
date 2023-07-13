@@ -2,6 +2,7 @@ const React = require('react');
 const Default = require('./layout/default.jsx');
 
 function Index({ breads, title }) {
+    console.log('bread array is ' + breads.length);
     return (
         <Default title={title}>
             <h2>Index Page</h2>
@@ -10,7 +11,7 @@ function Index({ breads, title }) {
             </div>
             <ul>
                 {
-                    breads.map((bread, index) => {
+                    breads.length ? breads.map((bread, index) => {
                         const breadId = bread.id;
 
                         return (
@@ -18,9 +19,12 @@ function Index({ breads, title }) {
                                 <a href={`/breads/${breadId}`}>
                                     {bread.name}
                                 </a>
+                                <ul>
+                                    <li>{bread.getBakedBy()}</li>
+                                </ul>
                             </li>
                         )
-                    })
+                    }) : <div>You're out of bread!</div>
                 }
             </ul>
             {/* <p>I have {breads[1].name} bread</p> */}
