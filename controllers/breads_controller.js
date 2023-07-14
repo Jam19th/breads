@@ -4,22 +4,39 @@ const Bread = require('../models/bread.js');
 const Baker = require('../models/baker.js')
 const seedData = require('../models/bread_seed.js')
 
-//Index /breads Route
-breads.get('/', (req, res) => {
-    Baker.find()
-        .then(foundBakers => {
-            Bread.find()
-                .populate('baker')
-                .then(foundBreads => {
-                    res.render('index', {
-                        breads: foundBreads,
-                        bakers: foundBakers,
-                        title: 'Index Page',
-                    })
-                })
+//Index /breads Route with async
+breads.get('/', async (req, res) => {
+    try {
+        const foundBakers = await Baker.find().lean()
+        const foundBreads = await Bread.find().limit(10).populate('baker')
+
+        res.render('index', {
+            breads: foundBreads,
+            bakers: foundBakers,
+            title: 'Index Page',
         })
+    } catch (err) {
+        console.log(err)
+    }
 })
 
+//Index /breads Route with promises
+// breads.get('/', (req, res) => {
+//     Baker.find()
+//         .then(foundBakers => {
+//             Bread.find()
+//                 .populate('baker')
+//                 .then(foundBreads => {
+//                     res.render('index', {
+//                         breads: foundBreads,
+//                         bakers: foundBakers,
+//                         title: 'Index Page',
+//                     })
+//                 })
+//         })
+// })
+
+// New Route
 breads.get('/new', (req, res) => {
     Baker.find()
         .then(foundBakers => {
